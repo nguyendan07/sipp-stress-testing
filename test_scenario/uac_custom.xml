@@ -58,8 +58,18 @@
     ]]>
   </send>
 
-  <!-- Wait 2 seconds (simulate listening to IVR) -->
-  <pause milliseconds="2000" />
+  <!-- Wait 30 seconds (simulate listening to IVR) -->
+  <pause milliseconds="30000" />
+
+  <!-- Send user interaction audio -->
+  <nop>
+    <action>
+      <exec rtp_stream="[field1]" />
+    </action>
+  </nop>
+
+  <!-- Pause for 3 seconds (simulating call duration) -->
+  <pause milliseconds="3000" />
 
   <!-- Send user interaction audio -->
   <nop>

@@ -78,7 +78,7 @@ sipp 118.69.115.150:5060 -sf test_scenario/uac_custom.xml -inf test_scenario/uac
 
 **Explanation of Common Options:**
 
-*   `<TARGET_SIP_SERVER_IP>:<PORT>`: **Required.** The IP address and port of the SIP server you are testing.
+*   `118.69.115.150:5060`: **Required.** The IP address and port of the SIP server you are testing.
 *   `-sf test_scenario/uac_custom.xml`: **Required.** Specifies the scenario file to use.
 *   `-inf test_scenario/uac_custom.csv`: Specifies the data injection file. SIPp will read data line-by-line from this CSV.
 *   `-m <NUMBER_OF_CALLS>`: Total number of calls to place.
