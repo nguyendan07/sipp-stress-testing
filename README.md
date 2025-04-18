@@ -15,7 +15,7 @@ If the repository version is outdated or you need specific features (like TLS, P
 1.  **Install Dependencies:**
     ```bash
     sudo apt update
-    sudo apt install build-essential libssl-dev libpcap-dev libncurses5-dev libnet1-dev # Add libsctp-dev if SCTP support is needed
+    sudo apt install build-essential cmake git libssl-dev libpcap-dev libncurses5-dev libnet1-dev # Add libsctp-dev if SCTP support is needed
     ```
 
 2.  **Download Source:** Get the latest stable release from the [SIPp GitHub Releases page](https://github.com/SIPp/sipp/releases).
@@ -25,7 +25,7 @@ If the repository version is outdated or you need specific features (like TLS, P
     wget https://github.com/SIPp/sipp/releases/download/vX.Y.Z/sipp-X.Y.Z.tar.gz # Replace X.Y.Z with version number
     tar -xzvf sipp-X.Y.Z.tar.gz
     cd sipp-X.Y.Z
-    ./configure # Add options like --with-pcap --with-ssl --with-sctp if needed
+    cmake . -DUSE_PCAP=1 -DUSE_SSL=1 -DUSE_SCTP=1
     make
     sudo make install
     ```
@@ -73,7 +73,7 @@ sipp -v
 **Run Command:**
 
 ```bash
-sipp 118.69.115.150:5060 -sf test_scenario/uac_custom.xml -inf test_scenario/uac_custom.csv -m 1000 -l 150 -r 15 -i 210.245.0.142 -p 5060 -d 10 -trace_err -trace_stat
+sipp 118.69.115.150:5060 -sf test_scenario/uac_custom.xml -inf test_scenario/uac_custom.csv -m 1000 -l 150 -r 15 -i 210.245.0.142 -p 5060 -s 19006600 -d 10 -trace_err -trace_stat
 ```
 
 **Explanation of Common Options:**
