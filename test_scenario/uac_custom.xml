@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="ISO-8859-1"?>
 <scenario name="UAC with media">
   <!-- Sending INVITE -->
-  <send retrans="500">
+  <send retrans="1000">
     <![CDATA[
-      INVITE sip:0987542702@118.69.115.150:5060 SIP/2.0
-      Via: SIP/2.0/UDP 210.245.0.142:5060;branch=[branch]
-      From: <sip:02927300001@210.245.0.142>;tag=[call_number]
-      To: <sip:0987542702@118.69.115.150>
+      INVITE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/UDP [local_ip]:[local_port];branch=[branch]
+      From: <sip:02927300001@[local_ip]>;tag=[call_number]
+      To: <sip:[service]@[remote_ip]>
       Call-ID: [call_id]
       CSeq: 1 INVITE
-      Contact: <sip:asterisk@210.245.0.142:5060>
+      Contact: <sip:sipp@[local_ip]:[local_port]>
       Max-Forwards: 70
       Content-Type: application/sdp
       Content-Length: [len]
 
       v=0
-      o=02927300001 53655765 2353687637 IN IP4 210.245.0.142
+      o=02927300001 53655765 2353687637 IN IP4 [local_ip]
       s=-
-      c=IN IP4 210.245.0.142
+      c=IN IP4 [local_ip]
       t=0 0
       m=audio 6000 RTP/AVP 0 8 9 103 101
       a=rtcp:6001
@@ -48,10 +48,10 @@
   <!-- Send ACK -->
   <send>
     <![CDATA[
-      ACK sip:0987542702@118.69.115.150:5060 SIP/2.0
-      Via: SIP/2.0/UDP 210.245.0.142:5060;branch=[branch]
-      From: <sip:02927300001@210.245.0.142>;tag=[call_number]
-      To: <sip:0987542702@118.69.115.150>[peer_tag_param]
+      ACK sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/UDP [local_ip]:[local_port];branch=[branch]
+      From: <sip:02927300001@[local_ip]>;tag=[call_number]
+      To: <sip:[service]@[remote_ip]>[peer_tag_param]
       Call-ID: [call_id]
       CSeq: 1 ACK
       Content-Length: 0
@@ -64,16 +64,7 @@
   <!-- Send user interaction audio -->
   <nop>
     <action>
-      <exec rtp_stream="[file name=audio_files.csv;random]" />
-    </action>
-  </nop>
-  <!--  Pause 8 seconds, which is approximately the duration of the       -->
-  <!--  PCAP file                                                         -->
-  <pause milliseconds="3000" />
-  <!--  Play an out of band DTMF '1'                                      -->
-  <nop>
-    <action>
-      <exec rtp_stream="../converted/confirm/confirm_8.wav" />
+      <exec rtp_stream="[field0]" />
     </action>
   </nop>
 
@@ -83,10 +74,10 @@
   <!-- Send BYE -->
   <send retrans="500">
     <![CDATA[
-      BYE sip:0987542702@118.69.115.150:5060 SIP/2.0
-      Via: SIP/2.0/UDP 210.245.0.142:5060;branch=[branch]
-      From: <sip:02927300001@210.245.0.142>;tag=[call_number]
-      To: <sip:0987542702@118.69.115.150>[peer_tag_param]
+      BYE sip:[service]@[remote_ip]:[remote_port] SIP/2.0
+      Via: SIP/2.0/UDP [local_ip]:[local_port];branch=[branch]
+      From: <sip:02927300001@[local_ip]>;tag=[call_number]
+      To: <sip:[service]@[remote_ip]>[peer_tag_param]
       Call-ID: [call_id]
       CSeq: 2 BYE
       Content-Length: 0
